@@ -8,8 +8,8 @@
 
 # on récupère les variables globales
 # et les fonctions de base
-. envi.sh
-. fnct.sh
+. env.sh
+. fctn.sh
 
 DHSLog BeginTask $0
 
@@ -31,7 +31,7 @@ if [[ $jourDeLaSemaine -eq 6 OR $jourDeLaSemaine -eq 7 ]]
 fi
 
 # creation du dossier de sauvegarde des images
-CR=`$DIR_SCRIPT/kmraDir.sh` 
+CR=`$KMRA_D_SCRIPT/kmraDir.sh` 
 
 if [ CR -ne 0 ]
 	then
@@ -40,4 +40,15 @@ if [ CR -ne 0 ]
 	exit
 fi
  
+# variables
+refresh=$1
+end=$2
+camera=ReB
 
+# debut de la prise de vue sur les cameras
+$KMRA_D_SCRIPT/kmra.sh $refresh $end $camera
+
+# on duplique les fichiers de la journée
+# dans le dossier temporaire
+
+# TODO

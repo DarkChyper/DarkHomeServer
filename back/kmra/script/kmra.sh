@@ -8,12 +8,10 @@
 
 # on récupère les variables globales
 # et les fonctions de base
-. envi.sh
-. fnct.sh
+. env.sh
+. fctn.sh
 
 DHSLog BeginTask $0
-
-DHSLog Info "Début du script de prise de vue automatique de la camera $camera"
 
 path=$KMRA_D_WWW/$(date '+%Y')/$(date '+%m')/$(date '+%d')
 refresh=$1
@@ -22,9 +20,11 @@ camera=$3
 
 temps=$(date '+%H%M%S')
 
+DHSLog Info "Début du script de prise de vue automatique de la camera $camera"
+
 while [ $temps -le $end ]
 	do
-		retour=`ssh dhs@$camera '$KMRA_S_FRONT takeShot 1920 1080 $path'`
+		retour=`ssh $LOGIN@$camera '$KMRA_S_FRONT takeShot 1920 1080 $path'`
 
 		sleep $refresh
 		temps=$(date '+%H%M%S')

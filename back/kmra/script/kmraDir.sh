@@ -8,18 +8,18 @@
 
 # on récupère les variables globales
 # et les fonctions de base
-. envi.sh
-. fnct.sh
+. env.sh
+. fctn.sh
 
 DHSLog BeginTask $0
 
-annee=$DIR_WWW/$(date '+%Y')
+annee=$KMRA_D_ARCHIVES/$(date '+%Y')
 mois=$annee/$(date '+%m')
 jour=$mois/$(date '+%d')
 
 if [ ! -e "$annee" ]
 	then
-		DHSLog Info "Creation du dossier de l'annee" "$annee"
+		DHSLog Info "Creation du dossier de l'annee : $annee"
 		mkdir $annee
 		CRA=$?
 		if [ $CRA -ne 0 ]
@@ -30,7 +30,7 @@ fi
 
 if [ ! -e "$mois" ]
 	then
-		DHSLog Info "Creation du dossier du mois" "$mois"
+		DHSLog Info "Creation du dossier du mois : $mois"
 		mkdir $mois
 		CRM=$?
 		if [ $CRM -ne 0 ]
@@ -41,7 +41,7 @@ fi
 
 if [ ! -e "$jour" ]
 	then
-		DHSLog Info "Creation du dossier du jour" "$jour"
+		DHSLog Info "Creation du dossier du jour : $jour"
 		mkdir $jour
 		CRD=$?
 		if [ $CRD -ne 0 ]
