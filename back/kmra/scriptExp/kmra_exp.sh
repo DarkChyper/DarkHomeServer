@@ -8,7 +8,7 @@
 
 # on récupère les variables globales
 # et les fonctions de base
-. env.sh
+. envi.sh
 . fctn.sh
 
 DHSLog BeginTask $0
@@ -23,19 +23,20 @@ fi
 # le script ne doit fonctionner que la semaine (v1.0)
 jourDeLaSemaine=$(date '+%u')
 
-if [[ $jourDeLaSemaine -eq 6 OR $jourDeLaSemaine -eq 7 ]]
+if [ $jourDeLaSemaine -eq 6 ] || [ $jourDeLaSemaine -eq 7 ]
 	then
 	DHSLog Warning "kmra_exp.sh doesn't work at week-end" "CR=4"
 	DHSLog EndTask $0
 	exit
 fi
 
-# creation du dossier de sauvegarde des images
-CR=`$KMRA_D_SCRIPT/kmraDir.sh` 
 
-if [ CR -ne 0 ]
+# creation du dossier de sauvegarde des images
+CreateDir "$KMRA_DIR_ARCHIVES"
+
+if [ ! -e "$KMRA_DIR_ARCHIVES/$(date '+%Y')/$(date '+%m')/$(date '+%d')" ]
 	then
-	DHSLog Error "kmraDir failed, kmra_exp stopped"
+	DHSLog Error "kmraDir failed, $0 stopped"
 	DHSLog EndTask $0
 	exit
 fi
@@ -43,10 +44,10 @@ fi
 # variables
 refresh=$1
 end=$2
-camera=ReB
+camera=reb
 
 # debut de la prise de vue sur les cameras
-$KMRA_D_SCRIPT/kmra.sh $refresh $end $camera
+$KMRA_DIR_SCRIPT/kmra.sh $refresh $end $camera
 
 # on duplique les fichiers de la journée
 # dans le dossier temporaire

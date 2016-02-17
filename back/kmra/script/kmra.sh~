@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ####################################
 # kmra.sh Author : Simon Lhoir     #
 # -------------------------------- #
@@ -8,12 +8,12 @@
 
 # on récupère les variables globales
 # et les fonctions de base
-. envi.sh
+. env.sh
 . fctn.sh
 
 DHSLog BeginTask $0
 
-path=$KMRA_DIR_ARCHIVES/$(date '+%Y')/$(date '+%m')/$(date '+%d')
+path=$KMRA_D_WWW/$(date '+%Y')/$(date '+%m')/$(date '+%d')
 refresh=$1
 end=$2
 camera=$3
@@ -24,13 +24,10 @@ DHSLog Info "Début du script de prise de vue automatique de la camera $camera"
 
 while [ $temps -le $end ]
 	do
-		echo $REB_SERVICE
-		retour=`ssh $LOGIN@$camera "$REB_SERVICE takeShot 1280 976 $path"`
+		retour=`ssh $LOGIN@$camera '$KMRA_S_FRONT takeShot 1920 1080 $path'`
 
 		sleep $refresh
 		temps=$(date '+%H%M%S')
-		# on met les droits sur tous les fichiers
-		chmod 666 $path/*.jpg
 
 	done
 
