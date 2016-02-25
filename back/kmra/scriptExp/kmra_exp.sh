@@ -1,4 +1,6 @@
 #!/bin/bash
+#exec 2>"/tmp/${0##*/}.log"
+#set -x
 ####################################
 # kmra_exp.sh Author : Simon Lhoir #
 # -------------------------------- #
@@ -41,15 +43,17 @@ if [ ! -e "$KMRA_DIR_ARCHIVES/$(date '+%Y')/$(date '+%m')/$(date '+%d')" ]
 	exit
 fi
  
+DHSLog Info "Fin des vérifications, lancement de la prise de vue"
 # variables
 refresh=$1
 end=$2
 camera=reb
 
 # debut de la prise de vue sur les cameras
-$KMRA_DIR_SCRIPT/kmra.sh $refresh $end $camera
+"${KMRA_DIR_SCRIPT}/kmra.sh" $refresh $end $camera
 
 # on duplique les fichiers de la journée
 # dans le dossier temporaire
 
 # TODO
+DHSLog EndTask $0

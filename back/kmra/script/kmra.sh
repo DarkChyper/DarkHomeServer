@@ -1,4 +1,6 @@
 #!/bin/sh
+#exec 2>"/tmp/${0##*/}.log"
+#set -x
 ####################################
 # kmra.sh Author : Simon Lhoir     #
 # -------------------------------- #
@@ -8,8 +10,8 @@
 
 # on récupère les variables globales
 # et les fonctions de base
-. envi.sh
-. fctn.sh
+#. envi.sh
+#. fctn.sh
 
 DHSLog BeginTask $0
 
